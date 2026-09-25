@@ -1,0 +1,87 @@
+name: Validate source packages
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  unix:
+    name: Extracted package (${{ matrix.platform }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {os: macos-15, platform: macos, library: libbridct.dylib}
+          - {os: ubuntu-24.04, platform: ubuntu, library: libbridct.so}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    env:
+      OPENBLAS_NUM_THREADS: 1
+      OMP_NUM_THREADS: 1
+      VECLIB_MAXIMUM_THREADS: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Package and test archive invariants
+        run: |
+          python tests/test_release.py
+          python distribution/build_release.py --output dist
+          version=$(cat PACKAGING_VERSION)
+          python -m zipfile -e "dist/bridct-$version-${{ matrix.platform }}.zip" "$RUNNER_TEMP/bridct-package"
+      - name: Install numerical test dependencies
+        run: python -m pip install numpy==2.4.4 scipy==1.17.1
+      - name: Build and validate extracted C and NumPy interfaces
+        working-directory: ${{ runner.temp }}/bridct-package/bridct
+        run: |
+          python tools/verify_source.py
+          python dataset/verify.py
+          make check-generated PYTHON=python
+          make -j2 check CC=clang
+          python tests/verify_portability.py --runner build/test_runner_shared --library build/${{ matrix.library }} --output build/numerical --execution 'GitHub runner: correctness validation only'
+          make -C python check-full PYTHON=python
+          make -C python check-hardening PYTHON=python
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-${{ matrix.platform }}
+          path: |
+            ${{ runner.temp }}/bridct-package/bridct/build/numerical/
+            ${{ runner.temp }}/bridct-package/bridct/python/build/*.json
+            ${{ runner.temp }}/bridct-package/bridct/python/build/*.log
+          retention-days: 14
+  windows:
+    name: Extracted package (Windows launcher)
+    runs-on: windows-2022
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Build and extract package
+        shell: pwsh
+        run: |
+          python distribution/build_release.py --output dist
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $version = (Get-Content PACKAGING_VERSION -Raw).Trim()
+          python -m zipfile -e "dist/bridct-$version-windows.zip" "$env:RUNNER_TEMP/bridct-package"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Run the distributed launcher without benchmarks
+        shell: pwsh
+        working-directory: ${{ runner.temp }}/bridct-package/bridct
+        run: |
+          & powershell.exe -NoProfile -ExecutionPolicy Bypass -File distribution/run_windows.ps1 -Profile Verify -Jobs 2
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: validation-windows
+          path: ${{ runner.temp }}/bridct-package/bridct/results/
+          retention-days: 14

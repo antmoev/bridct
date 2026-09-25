@@ -1,0 +1,13 @@
+{
+  "python": {
+    "version": "3.13.5",
+    "url": "https://api.nuget.org/v3-flatcontainer/python/3.13.5/python.3.13.5.nupkg",
+    "sha256": "fc496ae8aa3f7318704e24c4885c0cc0e3e6060c6e8af28aaa266226c01d96a1"
+  },
+  "msys2": {
+    "version": "2026-06-11",
+    "url": "https://github.com/msys2/msys2-installer/releases/download/2026-06-11/msys2-base-x86_64-20260611.sfx.exe",
+    "sha256": "c105946e64e08f099ac0e4647461ce762b95333ad211777666476a9a41451d65"
+  },
+  "notes": "Base archives pinned by SHA256. MSYS2 packages are installed from signed rolling repositories; actual package versions are recorded per run."
+}

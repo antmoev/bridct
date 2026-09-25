@@ -1,0 +1,13 @@
+build*/
+python/build*/
+__pycache__/
+*.pyc
+dist/
+results/
+.venv/
+.macos-work/
+.ubuntu-work/
+.windows-work/
+.windows-tools/
+.*-run.lock
+.DS_Store

@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "algorithm": "Shao\u2013Johnson scaled split-radix; existing BRiDCT equations, eight independent binary32 lanes",
+  "templates_sha256": {
+    "wide_small.c": "ae07a833f8f075191c80981083c7c0c200267e91b2c36090db40aaf2cf82a23b",
+    "rect_wide.c": "7aa5ab07b9aa726e163198f40f0aeafa1c4d4593a44c2d469ecfb4fd8debb942",
+    "wide8_ops.h": "7d47c0248ad9f292a3a77baf6eb55708c6a4f0faceced15ebc76468d276c495d",
+    "workspace.h": "459481eb0ffd12ad767b8a0a0f8fdda34fb6058e2e491481fe518a3dc61d562c"
+  },
+  "graph_dependencies_sha256": {
+    "src/generated/rect_generated.inc": "5d3acd0fdec6a322e248e2325487e4198c4de90b06c184491f360fd78ae3395f",
+    "src/generated/tables.inc": "c8bd2109b42b2293ff7193c142d6bd399bbe65f48703e103d78a6a0cc978c714",
+    "src/generated/sj_body.inc": "3fcc4d8b445a1ca20e7433bfd0377f35e4a6b2f61bf5874ef16dc5e1fd669a33"
+  },
+  "measured_rect_graph_sha256": "9468a701b395c0f6869164857a12ceda24113cc15ff1e68b0716b080cd1a81ed",
+  "snapshot_sha256": {
+    "wide-small": "3a603943c2507f93b62621f4c3b701a9d2f696c0d1a51d21747e499b9e5d0a59",
+    "wide8": "c503af06cc35c1f60ccd774c564479b8992fd5403dcda3f39b10d7bf1f31a531"
+  },
+  "evidence": {
+    "small_api": "GitHub Actions run 35565741242, Intel Xeon Platinum 8370C, two sessions, 3528 measurements",
+    "large_plans": "GitHub Actions run 35565031305, four measured forms",
+    "plan256": "GitHub Actions run 35566757063, AMD EPYC 7763, two exploratory sessions, 1344 measurements"
+  },
+  "license": "BSD-3-Clause, same as BRiDCT; no external implementation copied"
+}

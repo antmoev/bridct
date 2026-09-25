@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+type: software
+title: "BRiDCT: Fast Two-Dimensional DCTs Using SIMD"
+message: "Please cite this software and the associated technical report. Identify the software version used."
+authors:
+  - family-names: Moevus
+    given-names: Antoine
+  - family-names: Mignotte
+    given-names: Max
+version: "0.2.0-dev.7"
+repository-code: "https://github.com/antmoev/bridct"
+url: "https://github.com/antmoev/bridct/releases"
+abstract: "C11 SIMD implementation with native ARM NEON and SIMDe compatibility of orthonormal 2D DCT-II and its inverse, using the attributed Shao-Johnson factorization with selected SIMD and memory organizations. Ooura is retained separately as a benchmark comparator and historical source. Original code is BSD-3-Clause; Ooura-derived sources retain their upstream permission in NOTICE.md."
+keywords:
+  - discrete cosine transform
+  - SIMD
+  - ARM NEON
+  - numerical verification
+preferred-citation:
+  type: report
+  title: "BRiDCT: Fast Two-Dimensional DCTs Using SIMD: SIMD Organization, Register Blocking, and Numerical Verification"
+  authors:
+    - family-names: Moevus
+      given-names: Antoine
+    - family-names: Mignotte
+      given-names: Max
+  year: 2026
+  doi: "10.48550/arXiv.2609.28519"
+  url: "https://arxiv.org/abs/2609.28519"
+  institution:
+    name: Université de Montréal

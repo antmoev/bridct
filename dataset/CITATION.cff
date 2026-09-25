@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+type: dataset
+title: "BRiDCT adversarial DCT verification corpus"
+message: "Please cite this dataset and the associated BRiDCT technical report."
+authors:
+  - family-names: Moevus
+    given-names: Antoine
+  - family-names: Mignotte
+    given-names: Max
+version: "1.0.0"
+license: CC-BY-4.0
+abstract: "474 deterministic float32 arrays for orthonormal 2D DCT verification, including 420 core inputs and 54 boundary diagnostics."
+keywords:
+  - discrete cosine transform
+  - numerical verification
+  - floating-point arithmetic
+url: "https://github.com/antmoev/bridct/tree/main/dataset"
+references:
+  - type: report
+    title: "BRiDCT: Fast Two-Dimensional DCTs Using SIMD"
+    authors:
+      - family-names: Moevus
+        given-names: Antoine
+      - family-names: Mignotte
+        given-names: Max
+    year: 2026
+    doi: "10.48550/arXiv.2609.28519"

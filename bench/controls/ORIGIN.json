@@ -1,0 +1,9 @@
+{
+  "official_url": "https://www.kurims.kyoto-u.ac.jp/~ooura/fft.html",
+  "copyright": "Takuya Ooura, 1996\u20132001",
+  "sources": {
+    "ooura_local.c": "b69f2677b6b6eff96e816defec7958585c72743c0d31ef52f234a7639befb539",
+    "shrtdct_original.c": "a7898b4cee84076f963dcc50ce35d07c900cb6c091bbe98e7ca022644a011839"
+  },
+  "local_adaptation": "Existing C11 float scalar/SIMD adaptation; not an official Ooura SIMD release."
+}

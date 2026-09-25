@@ -1,0 +1,8 @@
+numpy==2.2.6; python_version == "3.10"
+numpy==2.4.4; python_version >= "3.11"
+scipy==1.15.3; python_version == "3.10"
+scipy==1.17.1; python_version >= "3.11"
+pyfftw==0.15.0; python_version == "3.10"
+pyfftw==0.15.1; python_version >= "3.11"
+ducc0==0.41.0
+opencv-python-headless==5.0.0.93

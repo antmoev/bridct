@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "factorization": "Shao-Johnson",
+  "scope": "Square 8x8 and 16x16 kernels; all other routes retain their previous policy.",
+  "experiment": "2026-09-21_portable-speed",
+  "candidate_sha256": "2e0f93a65667afc3487b8e833a7cf5db333384950ef40621a6904e655804da07",
+  "selection_rule": "Retain SJ unless another factorization improves time by at least 2% in both B1 and B4 in every confirmation session.",
+  "selection": "native-screen2",
+  "confirmation": ["native-confirm1", "native-confirm2"],
+  "arithmetic_sha256": {
+    "sj_body.inc": "3fcc4d8b445a1ca20e7433bfd0377f35e4a6b2f61bf5874ef16dc5e1fd669a33",
+    "tables.inc": "c8bd2109b42b2293ff7193c142d6bd399bbe65f48703e103d78a6a0cc978c714"
+  },
+  "choices": [
+    {"size": 8, "mode": 0, "layout": "fused_transpose", "variant": 2, "fma": 1},
+    {"size": 8, "mode": 1, "layout": "fused_transpose", "variant": 2, "fma": 1},
+    {"size": 8, "mode": 2, "layout": "registers", "variant": 1, "fma": 1},
+    {"size": 16, "mode": 0, "layout": "fused_transpose", "variant": 2, "fma": 1},
+    {"size": 16, "mode": 1, "layout": "fused_transpose", "variant": 2, "fma": 1},
+    {"size": 16, "mode": 2, "layout": "fused_transpose", "variant": 2, "fma": 1}
+  ],
+  "current_factorization_policy": "Shao-Johnson only. The selection_rule, selection and confirmation above record historical dev.2 decisions.",
+  "arm_clang_inverse16": {
+    "version": "0.2.0-dev.7",
+    "loop_unroll": "full",
+    "scope": "inverse16 only; forward/roundtrip and non-ARM-Clang retain preceding passes",
+    "factorization": "Shao-Johnson unchanged",
+    "evidence": "verification/sj-small-loop-2026-09-21/README.md"
+  }
+}

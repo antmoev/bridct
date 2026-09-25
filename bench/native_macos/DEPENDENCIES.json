@@ -1,0 +1,30 @@
+{
+  "fftw": {
+    "version": "3.3.11",
+    "url": "https://www.fftw.org/fftw-3.3.11.tar.gz",
+    "archive_sha256": "5630c24cdeb33b131612f7eb4b1a9934234754f9f388ff8617458d0be6f239a1"
+  },
+  "libjxl": {
+    "revision": "7741c8ce9998cbaffabec5cadd051b1b68afa3e2",
+    "url": "https://codeload.github.com/libjxl/libjxl/tar.gz/7741c8ce9998cbaffabec5cadd051b1b68afa3e2",
+    "archive_sha256": "68f755ab2735efaac0e3424bf3ca491c6eb1586ad31860c9cda160011128a280"
+  },
+  "highway": {
+    "revision": "457c891775a7397bdb0376bb1031e6e027af1c48",
+    "url": "https://codeload.github.com/google/highway/tar.gz/457c891775a7397bdb0376bb1031e6e027af1c48",
+    "archive_sha256": "5124b0501c98d9930dbb065bfa1a5bbbd59ce0f12facb7e1e33aaef01a5f1f1a"
+  },
+  "libjpeg_turbo": {
+    "version": "3.2.0",
+    "repository": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "tag": "3.2.0",
+    "recorded_binary_sha256": "f6379035aa1961db573f5b429d09f32ca90826d3becd5cfc8620575a24e4f1c4",
+    "recorded_binary_build": "Homebrew arm64 macOS 26 bottle; a local source rebuild need not have the same hash"
+  },
+  "ooura": {
+    "url": "https://www.kurims.kyoto-u.ac.jp/~ooura/fft.html",
+    "file": "vendor/ooura_float.c",
+    "sha256": "ffb28aeac416643c83d8e128d1c243ba9bf0a94bb9e2c342ea3de53d8be306c1",
+    "adaptation": "Mechanical float32 adaptation of fft4g.c; upstream algorithm unchanged. Attribution is in NOTICE.md."
+  }
+}
