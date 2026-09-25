@@ -1,0 +1,13 @@
+{
+  "paper": "https://arxiv.org/abs/2609.28519v1",
+  "authors": [
+    "Antoine Moevus",
+    "Max Mignotte"
+  ],
+  "description": "Unmodified figures from the technical report; timings evaluate BRiDCT dev.7 on one Apple M3 Max. Native and Python call boundaries differ.",
+  "sha256": {
+    "final_natural.png": "30f5952a2d8541e796894b071534338e3ecad7774a819c326041d471ea993dc9",
+    "final_python.png": "b46a26d8971987b33d892573a8ca13a1e67f51b7897d9105808c062f272c78c2",
+    "execution_organization.png": "6321c1d1edf10b93756e60786de2a645999123e4d3a2454ea46a123f1f631324"
+  }
+}

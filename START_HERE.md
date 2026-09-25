@@ -6,6 +6,14 @@ BRiDCT uses the Shao–Johnson factorization for every library route. It compute
 
 **Paper:** Antoine Moevus and Max Mignotte, [BRiDCT: Fast Two-Dimensional DCTs Using SIMD](https://arxiv.org/abs/2609.28519), 2026.
 
+## Performance at a glance
+
+**Apple M3 Max · BRiDCT dev.7 · native calls · 8×8–256×256.**
+
+![Native DCT speed ratios against FFTW, Ooura, Apple vDSP and libjxl, for forward, inverse and round-trip transforms.](docs/images/final_natural.png)
+
+Above the dashed **1×** line, BRiDCT is faster: **reference time / BRiDCT time**. These are the paper's session-2 ratios of median times, with descriptive paired-bootstrap 95% intervals over 21 blocks. Natural array layout and adapter copies are included; vDSP has no 8×8 measurement. Results apply to the measured Mac and interfaces.
+
 ## Download and run
 
 Get a source package from [Releases](https://github.com/antmoev/bridct/releases). Extract the entire ZIP, open its `bridct` folder, and follow `START_HERE.md`.
@@ -46,6 +54,22 @@ See the [NumPy API](python/README.md) for array layout, reusable outputs and pla
 “Exact DCT” means the mathematical transform is preserved, without an approximate transform matrix. Floating-point rounding, overflow and weak-component limitations still apply. The [verification corpus](dataset/README.md) contains 474 synthetic arrays, with 420 core inputs and 54 separately reported boundary inputs. Independent tests also cover all 64 supported shapes.
 
 The paper measures dev.7 on an Apple M3 Max. Its results do not establish superiority on every processor. The supplement distinguishes the Windows screen and earlier Ubuntu work. Native and Python comparisons use different call boundaries and are reported separately; no estimated Python overhead is subtracted. [Measurement correspondence](docs/RESULTS_MAP.md) explains how to access the recorded data and run new comparisons.
+
+### From Python
+
+**Apple M3 Max · compiled NumPy interface · one image per call · 8×8–1024×1024.**
+
+![Complete Python-call speed ratios against SciPy, DUCC, OpenCV and cached or planned pyFFTW.](docs/images/final_python.png)
+
+The vertical axis is logarithmic; above **1×** favors BRiDCT. Session-2 measurements include calls, allocations, copies and normalization. Round trips use separate forward and inverse calls for both methods. Each curve uses its own paired comparison; absolute times from different campaigns are not pooled. These are complete interface comparisons, not rankings of pure C kernels. Error bars are descriptive paired-bootstrap 95% intervals.
+
+### How the SIMD organization works
+
+![Four SIMD lanes process adjacent columns, then packed intermediate rows, before returning to natural row-major output.](docs/images/execution_organization.png)
+
+A conceptual 8×8 example of the banded route: four adjacent columns share a vector, then four intermediate rows are packed, transformed and unpacked. The band uses scratch memory; small kernels can use different organizations. BRiDCT preserves the Shao–Johnson factorization while adapting data movement and SIMD execution.
+
+Figures are reproduced unchanged from the [paper](https://arxiv.org/abs/2609.28519v1), by Antoine Moevus and Max Mignotte. The [recorded measurements](https://github.com/antmoev/bridct/releases/tag/v0.2.0-dev.7-r1) and [measurement correspondence](docs/RESULTS_MAP.md) provide the supporting data and protocols.
 
 ## Versions, data and licenses
 
