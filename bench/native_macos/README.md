@@ -73,4 +73,4 @@ Expect roughly 4–6 minutes per session on the measured Mac, with longer times 
 
 Keep `build/manifest.json`, `validation/`, both session folders and FFTW plan logs, and `analysis/`. The build manifest records compiler commands, reference pins, source/library hashes and BRiDCT version. Analysis emits microseconds per complete array and same-session reference/BRiDCT ratios. Review logs before sharing: process snapshots and local build paths describe the machine running the benchmark.
 
-These files contain no manuscript build system. `NOTICE.md` documents reference attribution and separate licensing.
+`NOTICE.md` documents reference attribution and separate licensing.

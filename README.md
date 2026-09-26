@@ -51,9 +51,9 @@ See the [NumPy API](python/README.md) for array layout, reusable outputs and pla
 
 ## Accuracy and performance
 
-“Exact DCT” means the mathematical transform is preserved, without an approximate transform matrix. Floating-point rounding, overflow and weak-component limitations still apply. The [verification corpus](dataset/README.md) contains 474 synthetic arrays, with 420 core inputs and 54 separately reported boundary inputs. Independent tests also cover all 64 supported shapes.
+“Exact DCT” means the mathematical transform is preserved, without an approximate transform matrix. Floating-point rounding, overflow and weak-component limitations still apply. The [verification dataset](dataset/README.md) contains 474 synthetic arrays, with 420 core inputs and 54 separately reported boundary inputs. Independent tests also cover all 64 supported shapes.
 
-The paper measures dev.7 on an Apple M3 Max. Its results do not establish superiority on every processor. The supplement distinguishes the Windows screen and earlier Ubuntu work. Native and Python comparisons use different call boundaries and are reported separately; no estimated Python overhead is subtracted. [Measurement correspondence](docs/RESULTS_MAP.md) explains how to access the recorded data and run new comparisons.
+The paper measures dev.7 on an Apple M3 Max. Its results do not establish superiority on every processor. Native and Python comparisons use different call boundaries and are reported separately; no estimated Python overhead is subtracted. [Measurement correspondence](docs/RESULTS_MAP.md) explains how to access the recorded data and run new comparisons.
 
 ### From Python
 
@@ -71,10 +71,26 @@ A conceptual 8×8 example of the banded route: four adjacent columns share a vec
 
 Figures are reproduced unchanged from the [paper](https://arxiv.org/abs/2609.28519v1), by Antoine Moevus and Max Mignotte. The [recorded measurements](https://github.com/antmoev/bridct/releases/tag/v0.2.0-dev.7-r1) and [measurement correspondence](docs/RESULTS_MAP.md) provide the supporting data and protocols.
 
+## Repository contents
+
+| Directory | Purpose |
+|---|---|
+| `include/`, `src/`, `examples/` | C library, headers and a runnable example |
+| `python/` | NumPy interface and Python benchmarks |
+| `dataset/` | Verification arrays, metadata and independent checks |
+| `tests/` | Numerical, API and package checks |
+| `bench/` | Timing tools and optional reference implementations |
+| `tools/` | SIMD kernel generators and source integrity checks |
+| `distribution/` | Platform build/test launchers and source ZIP builder |
+| `docs/` | API, platform instructions and illustrated results |
+| `third_party/` | Required SIMD compatibility headers and their licenses |
+
+To create your own software ZIPs, see [package instructions](docs/RELEASING.md).
+
 ## Versions, data and licenses
 
 The numerical implementation remains **0.2.0-dev.7**. Packaging revision **0.2.0-dev.7-r1** adds this standalone repository, corrected documentation and release tools; it does not change the kernels or input arrays. [Provenance](PROVENANCE.json) records the paper snapshot and immutable source hashes.
 
 Original code and tools use [BSD-3-Clause](LICENSE). Verification arrays and metadata use [CC BY 4.0](dataset/LICENSE). SIMDe and the optional Ooura benchmark controls retain their [attribution and permissions](NOTICE.md). Ooura is not linked into BRiDCT.
 
-Cite the [paper](https://doi.org/10.48550/arXiv.2609.28519) and identify the software version used; [CITATION.cff](CITATION.cff) and the [dataset citation](dataset/CITATION.cff) provide metadata. See [CONTRIBUTING.md](CONTRIBUTING.md) for development and [release instructions](docs/RELEASING.md) for packaging.
+Cite the [paper](https://doi.org/10.48550/arXiv.2609.28519) and identify the software version used; [CITATION.cff](CITATION.cff) and the [dataset citation](dataset/CITATION.cff) provide metadata. See [CONTRIBUTING.md](CONTRIBUTING.md) for development.
